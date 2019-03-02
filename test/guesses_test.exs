@@ -32,6 +32,7 @@ defmodule IslandsEngine.GuessesTest do
 
     test "raises when given anything else", %{guesses: guesses} do
       {:ok, coordinate} = Coordinate.new(1, 2)
+
       assert_raise FunctionClauseError, fn ->
         Guesses.add(guesses, :something_else, coordinate)
       end
