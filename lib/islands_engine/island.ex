@@ -32,8 +32,8 @@ defmodule IslandsEngine.Island do
 
   defp add_coordinate(coordinates, %Coordinate{row: row, col: col}, {row_offset, col_offset}) do
     case Coordinate.new(row + row_offset, col + col_offset) do
-      {:ok, coordinate} -> {:conn, MapSet.put(coordinates, coordinate)}
-      {:error, :invalid_island_type} -> {:halt, {:error, :invalid_coordinate}}
+      {:ok, coordinate} -> {:cont, MapSet.put(coordinates, coordinate)}
+      {:error, :invalid_coordinate} -> {:halt, {:error, :invalid_coordinate}}
     end
   end
 end
