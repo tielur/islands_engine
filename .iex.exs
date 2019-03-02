@@ -1,4 +1,5 @@
 alias IslandsEngine.{
   Coordinate,
-  Guesses
+  Guesses,
+  Island
 }
