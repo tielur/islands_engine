@@ -25,7 +25,7 @@ defmodule IslandsEngine.Island do
     not MapSet.disjoint?(existing_island.coordinates, new_island.coordinates)
   end
 
-  @spec guess(%Island{}, %Coordinate{}) :: {:hit, %Island{}} | :miss
+  @spec guess(%Island{}, %Coordinate{}) :: {:hit, %Coordinate{}} | :miss
   def guess(%Island{} = island, %Coordinate{} = coordinate) do
     case MapSet.member?(island.coordinates, coordinate) do
       true ->
