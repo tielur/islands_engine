@@ -71,5 +71,12 @@ defmodule IslandsEngine.IslandTest do
 
       assert Island.forested?(island)
     end
+
+    test "when the coordinates don't match the hit_coordinates it returns false" do
+      {:ok, coordinate} = Coordinate.new(1, 1)
+      {:ok, island} = Island.new(:dot, coordinate)
+
+      assert false == Island.forested?(island)
+    end
   end
 end
