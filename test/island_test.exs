@@ -45,4 +45,24 @@ defmodule IslandsEngine.IslandTest do
       assert false == Island.overlaps?(square, l_shape)
     end
   end
+
+  describe "guess/2" do
+    test "returns :miss when the guess wasn't right" do
+      {:ok, coordinate} = Coordinate.new(1, 1)
+      {:ok, island} = Island.new(:dot, coordinate)
+
+      {:ok, guess_coordinate} = Coordinate.new(5, 5)
+      assert :miss = Island.guess(island, guess_coordinate)
+    end
+  end
+
+  describe "forested?/1" do
+    test "it returns true if the coordinates match the hit_coordinates" do
+      {:ok, coordinate} = Coordinate.new(1, 1)
+      {:ok, island} = Island.new(:dot, coordinate)
+      {:hit, island} = Island.guess(island, coordinate)
+
+      assert Island.forested?(island)
+    end
+  end
 end
