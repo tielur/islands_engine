@@ -7,6 +7,7 @@ defmodule IslandsEngine.Island do
   @enforce_keys [:coordinates, :hit_coordinates]
   defstruct [:coordinates, :hit_coordinates]
 
+  @spec new(atom(), %Coordinate{}) :: {:ok, %Island{}} | {:error, atom()}
   def new(type, %Coordinate{} = upper_left) do
     with [_ | _] = offsets <- offsets(type),
          %MapSet{} = coordinates <- add_coordinates(offsets, upper_left) do
@@ -16,6 +17,7 @@ defmodule IslandsEngine.Island do
     end
   end
 
+  @spec overlaps?(%Island{}, %Island{}) :: boolean()
   def overlaps?(existing_island, new_island) do
     not MapSet.disjoint?(existing_island.coordinates, new_island.coordinates)
   end
