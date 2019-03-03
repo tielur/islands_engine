@@ -1,4 +1,7 @@
 defmodule IslandsEngine.Island do
+  @moduledoc """
+  Island struct
+  """
   alias IslandsEngine.{
     Coordinate,
     Island

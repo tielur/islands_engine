@@ -1,4 +1,7 @@
 defmodule IslandsEngine.Guesses do
+  @moduledoc """
+  Gusses struct
+  """
   alias IslandsEngine.{
     Coordinate,
     Guesses
