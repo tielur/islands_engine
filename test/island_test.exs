@@ -47,7 +47,7 @@ defmodule IslandsEngine.IslandTest do
   end
 
   describe "guess/2" do
-    test "returns :miss when the guess wasn't right" do
+    test "when the guess wasn't correct it returns :miss" do
       {:ok, coordinate} = Coordinate.new(1, 1)
       {:ok, island} = Island.new(:dot, coordinate)
 
@@ -57,7 +57,7 @@ defmodule IslandsEngine.IslandTest do
   end
 
   describe "forested?/1" do
-    test "it returns true if the coordinates match the hit_coordinates" do
+    test "when the coordinates match the hit_coordinates it returns true" do
       {:ok, coordinate} = Coordinate.new(1, 1)
       {:ok, island} = Island.new(:dot, coordinate)
       {:hit, island} = Island.guess(island, coordinate)
