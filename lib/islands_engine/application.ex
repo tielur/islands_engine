@@ -5,10 +5,7 @@ defmodule IslandsEngine.Application do
 
   use Application
 
-  @type app :: atom
-  @type restart_type :: :permanent | :transient | :temporary
-
-  @spec start(app(), restart_type()) :: :ok | {:error, term()}
+  # credo:disable-for-next-line
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
