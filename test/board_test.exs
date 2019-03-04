@@ -66,4 +66,38 @@ defmodule IslandsEngine.BoardTest do
       refute Board.all_islands_positioned?(board)
     end
   end
+
+  describe "guess/2" do
+    setup do
+      board = Board.new()
+      {:ok, square_coordinate} = Coordinate.new(1, 1)
+      {:ok, square_island} = Island.new(:square, square_coordinate)
+      board = Board.position_island(board, :square, square_island)
+      {:ok, dot_coordinate} = Coordinate.new(3, 3)
+      {:ok, dot_island} = Island.new(:dot, dot_coordinate)
+      board = Board.position_island(board, :dot, dot_island)
+
+      {:ok, board: board, square_island: square_island}
+    end
+
+    test "when a guess misses", %{board: board} do
+      {:ok, guess_coordinate} = Coordinate.new(10, 10)
+      assert {:miss, :none, :no_win, board} = Board.guess(board, guess_coordinate)
+    end
+
+    test "when a guess hits", %{board: board} do
+      {:ok, guess_coordinate} = Coordinate.new(1, 1)
+      assert {:hit, :none, :no_win, board} = Board.guess(board, guess_coordinate)
+    end
+
+    test "when a guess hits and it's a win", %{square_island: square_island, board: board} do
+      # make the squares hit_coordinates the same as it's coordinates
+      # to simulate that it's been forested
+      square_island = %{square_island | hit_coordinates: square_island.coordinates}
+      board = Board.position_island(board, :square, square_island)
+
+      {:ok, win_coordinate_guess} = Coordinate.new(3, 3)
+      {:hit, :dot, :win, board} = Board.guess(board, win_coordinate_guess)
+    end
+  end
 end
