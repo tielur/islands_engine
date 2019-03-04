@@ -35,5 +35,35 @@ defmodule IslandsEngine.BoardTest do
   end
 
   describe "all_islands_positioned?" do
+    test "when all of the islands have been placed it returns true" do
+      board = Board.new()
+      {:ok, dot_coordinate} = Coordinate.new(1, 1)
+      {:ok, dot_island} = Island.new(:dot, dot_coordinate)
+
+      {:ok, atoll_coordinate} = Coordinate.new(2, 1)
+      {:ok, atoll_island} = Island.new(:atoll, atoll_coordinate)
+
+      {:ok, l_shape_coordinate} = Coordinate.new(4, 5)
+      {:ok, l_shape_island} = Island.new(:l_shape, l_shape_coordinate)
+
+      {:ok, s_shape_coordinate} = Coordinate.new(6, 1)
+      {:ok, s_shape_island} = Island.new(:s_shape, s_shape_coordinate)
+
+      {:ok, square_coordinate} = Coordinate.new(8, 1)
+      {:ok, square_island} = Island.new(:square, square_coordinate)
+
+      board = Board.position_island(board, :dot, dot_island)
+      board = Board.position_island(board, :atoll, atoll_island)
+      board = Board.position_island(board, :l_shape, l_shape_island)
+      board = Board.position_island(board, :s_shape, s_shape_island)
+      board = Board.position_island(board, :square, square_island)
+
+      assert Board.all_islands_positioned?(board)
+    end
+
+    test "when all of the islands have not been placed it returns false" do
+      board = Board.new()
+      refute Board.all_islands_positioned?(board)
+    end
   end
 end
