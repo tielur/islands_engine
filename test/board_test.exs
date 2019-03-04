@@ -34,7 +34,7 @@ defmodule IslandsEngine.BoardTest do
     end
   end
 
-  describe "all_islands_positioned?" do
+  describe "all_islands_positioned?/1" do
     test "when all of the islands have been placed it returns true" do
       board = Board.new()
       {:ok, dot_coordinate} = Coordinate.new(1, 1)
