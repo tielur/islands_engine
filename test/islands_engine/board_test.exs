@@ -97,7 +97,7 @@ defmodule IslandsEngine.BoardTest do
       board = Board.position_island(board, :square, square_island)
 
       {:ok, win_coordinate_guess} = Coordinate.new(3, 3)
-      {:hit, :dot, :win, board} = Board.guess(board, win_coordinate_guess)
+      {:hit, :dot, :win, _board} = Board.guess(board, win_coordinate_guess)
     end
   end
 end
