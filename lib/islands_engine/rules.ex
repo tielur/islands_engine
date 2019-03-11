@@ -29,8 +29,11 @@ defmodule IslandsEngine.Rules do
     {:ok, %Rules{rules | state: :players_set}}
   end
 
-  @spec check(%Rules{state: :players_set}, {:position_islands, :player1 | :player2}) ::
-          {:ok, %Rules{}} | :error
+  @spec check(
+          %Rules{state: :players_set},
+          {:position_islands, :player1 | :player2} | {:set_islands, :player1 | :player2}
+        ) ::
+          {:ok, %Rules{state: :players_set}} | {:ok, %Rules{state: :player1_turn}} | :error
   def check(%Rules{state: :players_set} = rules, {:position_islands, player}) do
     case Map.fetch!(rules, player) do
       :islands_set -> :error
@@ -38,8 +41,6 @@ defmodule IslandsEngine.Rules do
     end
   end
 
-  @spec check(%Rules{state: :players_set}, {:set_islands, :player1 | :player2}) ::
-          {:ok, %Rules{state: :players_set}} | {:ok, %Rules{state: :player1_turn}}
   def check(%Rules{state: :players_set} = rules, {:set_islands, player}) do
     rules = Map.put(rules, player, :islands_set)
 
@@ -49,7 +50,6 @@ defmodule IslandsEngine.Rules do
     end
   end
 
-  @spec check(term(), term()) :: :error
   def check(_state, _action) do
     :error
   end
