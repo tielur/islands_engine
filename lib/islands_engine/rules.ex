@@ -1,4 +1,18 @@
 defmodule IslandsEngine.Rules do
+  @moduledoc """
+  Rules for the Island Game
+
+  Starts with :initialized state
+
+  :initialized
+    - Can :add_player -> :players_set
+
+  :players_set
+   - Can :position_islands
+   - Can :set_islands -> :player1_turn
+
+  :player1_turn
+  """
   alias __MODULE__
 
   defstruct state: :initialized,
